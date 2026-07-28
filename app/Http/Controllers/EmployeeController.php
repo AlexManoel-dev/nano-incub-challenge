@@ -31,13 +31,6 @@ class EmployeeController extends Controller
             ->with('success', 'Funcionário cadastrado com sucesso.');
     }
 
-    public function edit(Employee $employee): Response
-    {
-        return Inertia::render('employees/edit', [
-            'employee' => $employee,
-        ]);
-    }
-
     public function update(
         UpdateEmployeeRequest $request,
         Employee $employee

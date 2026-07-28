@@ -5,7 +5,6 @@ import { FormEventHandler } from 'react';
 interface LoginForm {
     email: string;
     password: string;
-    remember: boolean;
 }
 
 interface LoginProps {
@@ -16,7 +15,6 @@ export default function Login({ status }: LoginProps) {
     const { data, setData, post, processing, errors, reset } = useForm<LoginForm>({
         email: '',
         password: '',
-        remember: false,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -84,20 +82,9 @@ export default function Login({ status }: LoginProps) {
                             {errors.password && <p className="mt-1.5 text-sm text-[#B3261E]">{errors.password}</p>}
                         </div>
 
-                        <label className="mb-5 flex items-center gap-2 text-sm text-[#5B6472]">
-                            <input
-                                type="checkbox"
-                                tabIndex={3}
-                                checked={data.remember}
-                                onChange={(e) => setData('remember', e.target.checked)}
-                                className="h-4 w-4 rounded border-[#D6DAE0] text-[#0E7C66] focus:ring-[#0E7C66]/30"
-                            />
-                            Lembrar de mim
-                        </label>
-
                         <button
                             type="submit"
-                            tabIndex={4}
+                            tabIndex={3}
                             disabled={processing}
                             className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#0E7C66] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0B6553] disabled:cursor-not-allowed disabled:opacity-50"
                         >

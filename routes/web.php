@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('employees', EmployeeController::class)
-        ->except(['show', 'create']);
+        ->except(['show', 'create', 'edit']);
 });
 
 require __DIR__.'/auth.php';
