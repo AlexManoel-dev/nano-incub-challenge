@@ -1,14 +1,6 @@
 import { Head, useForm } from '@inertiajs/react';
-import { LoaderCircle } from 'lucide-react';
+import { LoaderCircle, Wallet } from 'lucide-react';
 import { FormEventHandler } from 'react';
-
-import InputError from '@/components/input-error';
-import TextLink from '@/components/text-link';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import AuthLayout from '@/layouts/auth-layout';
 
 interface LoginForm {
     email: string;
@@ -35,61 +27,86 @@ export default function Login({ status }: LoginProps) {
     };
 
     return (
-        <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
+        <>
             <Head title="Log in" />
 
-            <form className="flex flex-col gap-6" onSubmit={submit}>
-                <div className="grid gap-6">
-                    <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            required
-                            autoFocus
-                            tabIndex={1}
-                            autoComplete="email"
-                            value={data.email}
-                            onChange={(e) => setData('email', e.target.value)}
-                            placeholder="email@example.com"
-                        />
-                        <InputError message={errors.email} />
+            <main className="flex min-h-screen items-center justify-center bg-[#F5F7F8] px-6">
+                <div className="w-full max-w-sm">
+                    <div className="mb-6 flex flex-col items-center text-center">
+                        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0E7C66]/10">
+                            <Wallet className="h-6 w-6 text-[#0E7C66]" />
+                        </div>
+                        <h1 className="text-xl font-bold tracking-tight text-[#12161C]">Entrar</h1>
+                        <p className="mt-1 text-sm text-[#5B6472]">Acesse o painel de bonificação.</p>
                     </div>
 
-                    <div className="grid gap-2">
-                        <Input
-                            id="password"
-                            type="password"
-                            required
-                            tabIndex={2}
-                            autoComplete="current-password"
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            placeholder="Password"
-                        />
-                        <InputError message={errors.password} />
-                    </div>
+                    {status && (
+                        <div className="mb-4 rounded-lg bg-[#E4F5F1] px-4 py-2.5 text-center text-sm font-medium text-[#0B6553]">{status}</div>
+                    )}
 
-                    <div className="flex items-center space-x-3">
-                        <Checkbox id="remember" name="remember" tabIndex={3} />
-                        <Label htmlFor="remember">Remember me</Label>
-                    </div>
+                    <form onSubmit={submit} className="rounded-2xl border border-[#E3E7EA] bg-white p-6 shadow-sm">
+                        <div className="mb-4">
+                            <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-[#12161C]">
+                                Email
+                            </label>
+                            <input
+                                id="email"
+                                type="email"
+                                required
+                                autoFocus
+                                tabIndex={1}
+                                autoComplete="email"
+                                value={data.email}
+                                onChange={(e) => setData('email', e.target.value)}
+                                disabled={processing}
+                                placeholder="voce@empresa.com"
+                                className="w-full rounded-lg border border-[#D6DAE0] px-3 py-2.5 text-sm text-[#12161C] placeholder:text-[#A2A9B2] focus:border-[#0E7C66] focus:ring-2 focus:ring-[#0E7C66]/20 focus:outline-none"
+                            />
+                            {errors.email && <p className="mt-1.5 text-sm text-[#B3261E]">{errors.email}</p>}
+                        </div>
 
-                    <Button type="submit" className="mt-4 w-full" tabIndex={4} disabled={processing}>
-                        {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                        Log in
-                    </Button>
+                        <div className="mb-5">
+                            <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-[#12161C]">
+                                Senha
+                            </label>
+                            <input
+                                id="password"
+                                type="password"
+                                required
+                                tabIndex={2}
+                                autoComplete="current-password"
+                                value={data.password}
+                                onChange={(e) => setData('password', e.target.value)}
+                                disabled={processing}
+                                placeholder="Senha"
+                                className="w-full rounded-lg border border-[#D6DAE0] px-3 py-2.5 text-sm text-[#12161C] placeholder:text-[#A2A9B2] focus:border-[#0E7C66] focus:ring-2 focus:ring-[#0E7C66]/20 focus:outline-none"
+                            />
+                            {errors.password && <p className="mt-1.5 text-sm text-[#B3261E]">{errors.password}</p>}
+                        </div>
+
+                        <label className="mb-5 flex items-center gap-2 text-sm text-[#5B6472]">
+                            <input
+                                type="checkbox"
+                                tabIndex={3}
+                                checked={data.remember}
+                                onChange={(e) => setData('remember', e.target.checked)}
+                                className="h-4 w-4 rounded border-[#D6DAE0] text-[#0E7C66] focus:ring-[#0E7C66]/30"
+                            />
+                            Lembrar de mim
+                        </label>
+
+                        <button
+                            type="submit"
+                            tabIndex={4}
+                            disabled={processing}
+                            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#0E7C66] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0B6553] disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                            {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
+                            Entrar
+                        </button>
+                    </form>
                 </div>
-
-                <div className="text-muted-foreground text-center text-sm">
-                    Don't have an account?{' '}
-                    <TextLink href={route('register')} tabIndex={5}>
-                        Sign up
-                    </TextLink>
-                </div>
-            </form>
-
-            {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
-        </AuthLayout>
+            </main>
+        </>
     );
 }

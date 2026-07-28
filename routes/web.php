@@ -10,11 +10,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('employees', EmployeeController::class)
-        ->except('show');
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+        ->except(['show', 'create']);
 });
 
-require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

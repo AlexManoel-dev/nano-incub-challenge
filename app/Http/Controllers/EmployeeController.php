@@ -14,17 +14,11 @@ class EmployeeController extends Controller
     public function index(): Response
     {
         $employees = Employee::query()
-            ->latest()
             ->get();
 
         return Inertia::render('employees/index', [
             'employees' => $employees,
         ]);
-    }
-
-    public function create(): Response
-    {
-        return Inertia::render('employees/create');
     }
 
     public function store(
