@@ -1,7 +1,7 @@
-### Desafio
+## Desafio
 
-## Como subir o projeto
+### Como subir o projeto
 
-## Credenciais de acesso
+### Credenciais de acesso
 
-## Decisões técnicas
+### Decisões técnicas
