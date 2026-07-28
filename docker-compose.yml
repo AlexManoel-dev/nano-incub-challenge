@@ -1,0 +1,49 @@
+services:
+  app:
+    build: .
+
+    container_name: nano-incub-app
+
+    working_dir: /var/www/html
+
+    volumes:
+      - .:/var/www/html
+
+    ports:
+      - "8000:8000"
+      - "5173:5173"
+
+    depends_on:
+      - mysql
+
+    command: >
+      sh -c "
+      composer install &&
+      npm install &&
+      php artisan key:generate --force &&
+      php artisan migrate --force &&
+      (npm run dev -- --host 0.0.0.0 &) &&
+      php artisan serve --host=0.0.0.0 --port=8000
+      "
+
+  mysql:
+    image: mysql:8.4
+
+    container_name: nano-incub-mysql
+
+    restart: unless-stopped
+
+    environment:
+      MYSQL_DATABASE: nano_incub
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
