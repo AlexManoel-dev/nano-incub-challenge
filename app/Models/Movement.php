@@ -2,18 +2,29 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Movement extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'employee_id',
         'type',
         'amount',
-        'description',
+        'observation',
     ];
 
-    public function employee()
+    protected function casts(): array
+    {
+        return [
+            'amount' => 'decimal:2',
+        ];
+    }
+
+    public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
     }

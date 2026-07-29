@@ -42,12 +42,17 @@ class EmployeeController extends Controller
             ->with('success', 'Funcionário atualizado com sucesso.');
     }
 
+    
     public function destroy(Employee $employee): RedirectResponse
     {
+        if ($employee->movements()->exists()) {
+            return back()->withErrors([
+                'employee' => 'Não é possível excluir um funcionário que possui movimentações.',
+            ]);
+        }
+
         $employee->delete();
 
-        return redirect()
-            ->route('employees.index')
-            ->with('success', 'Funcionário excluído com sucesso.');
+        return back()->with('success', 'Funcionário excluído com sucesso.');
     }
 }

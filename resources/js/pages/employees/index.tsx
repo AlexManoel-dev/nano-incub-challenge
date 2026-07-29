@@ -6,7 +6,7 @@ import {
     Trash2,
     Users,
 } from 'lucide-react';
-import { FormEvent, useState } from 'react';
+import { type FormEvent, useState } from 'react';
 
 import {
     Dialog,
@@ -60,6 +60,8 @@ export default function EmployeeIndex({ employees }: Props) {
     const {
         delete: destroy,
         processing: deleting,
+        errors: deleteErrors,
+        clearErrors: clearDeleteErrors,
     } = useForm();
 
     const isEditing = selectedEmployee !== null;
@@ -104,11 +106,17 @@ export default function EmployeeIndex({ employees }: Props) {
     }
 
     function openDeleteModal(employee: Employee) {
+        clearDeleteErrors();
         setSelectedEmployee(employee);
         setDeleteOpen(true);
     }
 
     function closeDeleteModal() {
+        if (deleting) {
+            return;
+        }
+
+        clearDeleteErrors();
         setDeleteOpen(false);
         setSelectedEmployee(null);
     }
@@ -141,7 +149,8 @@ export default function EmployeeIndex({ employees }: Props) {
                             </h1>
 
                             <p className="text-sm text-[#5B6472]">
-                                Saldo de cada funcionário no sistema de bonificação.
+                                Saldo de cada funcionário no sistema de
+                                bonificação.
                             </p>
                         </div>
                     </div>
@@ -192,7 +201,11 @@ export default function EmployeeIndex({ employees }: Props) {
                                         className="transition-colors hover:bg-[#FAFBFC]"
                                     >
                                         <td className="px-5 py-3.5 font-mono text-[#8A93A0] tabular-nums">
-                                            #{String(employee.id).padStart(3, '0')}
+                                            #
+                                            {String(employee.id).padStart(
+                                                3,
+                                                '0',
+                                            )}
                                         </td>
 
                                         <td className="px-5 py-3.5 font-medium text-[#12161C]">
@@ -381,6 +394,12 @@ export default function EmployeeIndex({ employees }: Props) {
                         </DialogDescription>
                     </DialogHeader>
 
+                    {deleteErrors.employee && (
+                        <div className="rounded-lg border border-[#F0C7C4] bg-[#FFF1F0] px-4 py-3 text-sm text-[#B3261E]">
+                            {deleteErrors.employee}
+                        </div>
+                    )}
+
                     <DialogFooter>
                         <button
                             type="button"
@@ -401,7 +420,9 @@ export default function EmployeeIndex({ employees }: Props) {
                                 <LoaderCircle className="h-4 w-4 animate-spin" />
                             )}
 
-                            {deleting ? 'Excluindo...' : 'Excluir funcionário'}
+                            {deleting
+                                ? 'Excluindo...'
+                                : 'Excluir funcionário'}
                         </button>
                     </DialogFooter>
                 </DialogContent>
