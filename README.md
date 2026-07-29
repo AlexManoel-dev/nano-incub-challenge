@@ -8,6 +8,9 @@
    ```
 3. Edite o `.env` e preencha as credenciais do banco (precisam bater com o que está em `docker-compose.yml`):
    ```
+   DB_CONNECTION=mysql
+   DB_HOST=mysql
+   DB_PORT=3306
    DB_DATABASE=nano_incub
    DB_USERNAME=laravel
    DB_PASSWORD=laravel
