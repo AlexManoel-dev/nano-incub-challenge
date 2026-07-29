@@ -2,11 +2,20 @@
 
 ### Como subir o projeto
 1. Clone o repositório
-2. Copie o arquivo de ambiente:
+2. Entre na pasta:
+    ```
+    cd nano-incub-challenge
+    ```
+3. Copie o arquivo de ambiente:
+   Linux
    ```
    cp .env.example .env
    ```
-3. Edite o `.env` e preencha as credenciais do banco (precisam bater com o que está em `docker-compose.yml`):
+   Windows
+   ```
+   copy .env.example .env
+   ```
+4. Edite o `.env` e preencha as credenciais do banco (precisam bater com o que está em `docker-compose.yml`):
    ```
    DB_CONNECTION=mysql
    DB_HOST=mysql
@@ -15,15 +24,15 @@
    DB_USERNAME=laravel
    DB_PASSWORD=laravel
    ```
-4. Suba os containers:
+5. Suba os containers:
    ```
    docker-compose up -d --build
    ```
-5. Rode as migrations com o seeder:
+6. Rode as migrations com o seeder:
    ```
    docker-compose exec app php artisan migrate:fresh --seed
    ```
-6. Acesse http://localhost:8000/login
+7. Acesse http://localhost:8000/login
 
 ### Credenciais de acesso
 
