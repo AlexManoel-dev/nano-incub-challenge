@@ -24,7 +24,7 @@
 
 ### Credenciais de acesso
 
-email: admin@admin.com
+email: admin@admin.com\
 senha: 12345678
 
 ### Decisões técnicas
