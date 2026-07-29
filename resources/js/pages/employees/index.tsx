@@ -1,4 +1,4 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, router, useForm } from '@inertiajs/react';
 import {
     LoaderCircle,
     Pencil,
@@ -6,7 +6,7 @@ import {
     Trash2,
     Users,
 } from 'lucide-react';
-import { type FormEvent, useState } from 'react';
+import { type FormEvent, useEffect, useState } from 'react';
 
 import {
     Dialog,
@@ -40,6 +40,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 export default function EmployeeIndex({ employees }: Props) {
     const [formOpen, setFormOpen] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
+    
+    useEffect(() => {
+        router.reload({ only: ['employees'] });
+    }, []);
 
     const [selectedEmployee, setSelectedEmployee] =
         useState<Employee | null>(null);

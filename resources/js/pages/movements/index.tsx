@@ -1,6 +1,6 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, router, useForm } from '@inertiajs/react';
 import {
     ArrowDownCircle,
     ArrowUpCircle,
@@ -9,7 +9,7 @@ import {
     Wallet,
     X,
 } from 'lucide-react';
-import { type FormEventHandler, useState } from 'react';
+import { type FormEventHandler, useEffect, useState } from 'react';
 
 interface Employee {
     id: number;
@@ -54,6 +54,10 @@ export default function Index({
     employees,
 }: MovementPageProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        router.reload({ only: ['movements', 'employees'] });
+    }, []);
 
     const {
         data,
