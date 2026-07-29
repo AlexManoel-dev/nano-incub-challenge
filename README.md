@@ -6,7 +6,7 @@
    ```
    cp .env.example .env
    ```
-3. Edite o \`.env\` e preencha as credenciais do banco (precisam bater com o que está em \`docker-compose.yml\`):
+3. Edite o `.env` e preencha as credenciais do banco (precisam bater com o que está em `docker-compose.yml`):
    ```
    DB_DATABASE=nano_incub
    DB_USERNAME=laravel
