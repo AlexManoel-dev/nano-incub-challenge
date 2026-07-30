@@ -6,7 +6,7 @@
     ```
     cd nano-incub-challenge
     ```
-3. Copie o arquivo de ambiente:
+3. Copie o arquivo de ambiente:\
    Linux
    ```
    cp .env.example .env
