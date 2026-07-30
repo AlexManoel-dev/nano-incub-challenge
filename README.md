@@ -28,11 +28,12 @@
    ```
    docker-compose up -d --build
    ```
-6. Rode as migrations com o seeder:
+6. Espere um tempo até baixar todas as dependências do laravel e react, o primeiro build sempre demora por falta de cache
+7. Rode as migrations com o seeder:
    ```
    docker-compose exec app php artisan migrate:fresh --seed
    ```
-7. Acesse http://localhost:8000/login
+8. Acesse http://localhost:8000/login
 
 ### Credenciais de acesso
 

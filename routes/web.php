@@ -6,7 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MovementController;
 
 Route::get('/', function () {
-    return Inertia::render('welcome');
+    return Inertia::render('login');
 })->name('home');
 
 Route::middleware(['auth'])->group(function () {
