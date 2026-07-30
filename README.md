@@ -74,3 +74,6 @@ Usei Claude principalmente para estilo/UI (paleta de cores, componentes React/Ta
 - **Índices no banco:** movements.employee_id já tem índice (é foreignId), mas não adicionei índice em movements.created_at, que é o campo usado pra ordenar a listagem (latest()). Não é gargalo com poucos registros, mas seria o primeiro ajuste de performance com mais dados
 
 - **CI:** Não configurei GitHub Actions pra rodar os testes/lint automaticamente a cada push
+
+**Desenho do banco:**
+<img width="1234" height="604" alt="image" src="https://github.com/user-attachments/assets/8aa43d64-881c-47ae-9cc2-0704c054c247" />
