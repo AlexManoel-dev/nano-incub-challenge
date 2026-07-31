@@ -5,9 +5,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MovementController;
 
-Route::get('/', function () {
-    return Inertia::render('login');
-})->name('home');
+Route::get('/', fn () => redirect()->route('login'))->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('employees', EmployeeController::class)
